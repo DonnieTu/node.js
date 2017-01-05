@@ -13,6 +13,23 @@
         },
         {
             "type": "node",
+            "request": "launch",
+            "name": "Launch service",
+            "env": {
+                "SERVERPORT":"3002"
+            },
+            "program": "${workspaceRoot}/fiboserver.js",
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch client",
+            "program": "${workspaceRoot}/fiboclient.js",
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "type": "node",
             "request": "attach",
             "name": "Attach to Process",
             "port": 5858
