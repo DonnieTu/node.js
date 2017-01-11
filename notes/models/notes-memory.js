@@ -2,9 +2,9 @@
 Promise=require('bluebird');
 
 var notes=[];
-const Note=require('./note');
+const Note=require('./notes');
 
-exports.update=exports.create = funciton(key,title,body) {
+exports.update=exports.create = function(key,title,body) {
     return new Promise((resolve,reject)=>{
         notes[key]=new Note(key,title,body);
         resolve(notes[key]);
@@ -31,9 +31,9 @@ exports.destory=function(key) {
     });
 };
 
-exports.keylist=function {
-    return new Promises((resolve,reject)=> {
-        resolve(notes.keys)
+exports.keylist=function() {
+    return new Promise((resolve,reject)=> {
+        resolve(Object.keys(notes));
     });
 };
 
