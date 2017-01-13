@@ -7,7 +7,7 @@ var notes=require('../models/notes-memory');
 
 rounter.get('/add',(req,res,next) => {
     res.render('noteedit',{
-        title:"add a Note",
+        title:"add a note",
         docreate: true,
         notekey: "",
         note:undefined
@@ -28,8 +28,10 @@ rounter.post('/save',(req,res,next)=>{
 
 rounter.get('/view',(req,res,next)=>{
     notes.read(req.query.notekey)
-    .then(note=>{res.render('noteview',{
-            note:node
+    .then((note)=>{
+        res.render('noteview',{
+            title:note.title,
+            note:note
         });
     })
     .catch(err=>next(err));
