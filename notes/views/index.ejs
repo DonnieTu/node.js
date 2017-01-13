@@ -5,12 +5,12 @@
   </head>
   <body>
     <% include pageHeader %>
-    <% if (nodelist.length>0) { %>
+    <% if (notelist.length>0) { %>
     <ul>
     <%for (var note of notelist) { %>
       <li><%= note.key %>
-      <a href="/notes/view?key=<%= note.key %>"> <%= note.title %></a>
-      <li>
+      <a href="/notes/view?noteKey=<%= note.key %>"> <%= note.title %></a>
+      </li>
     <% } %>
     </ul>
     <% }%>

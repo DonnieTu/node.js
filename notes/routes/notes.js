@@ -14,12 +14,27 @@ rounter.get('/add',(req,res,next) => {
     });
 });
 
+rounter.get('/edit',(req,res,next)=>{
+    notes.read(req.query.key)
+    .then((note)=>{
+        res.render('noteedit',{
+            title:"edit a note",
+            docreate: false,
+            noteKey:note.key,
+            note:note
+        });
+    })
+    .catch(err=>{
+        next(err);
+    });
+});
+
 rounter.post('/save',(req,res,next)=>{
     var promise;
     if(req.body.docreate=='create') 
-        promise=notes.create(req.body.notekey,req.body.title,req.body.body);
+        promise=notes.create(req.body.noteKey,req.body.title,req.body.body);
     else
-        promise=notes.update(req.body.notekey,req.body.title,req.body.body);
+        promise=notes.update(req.body.noteKey,req.body.title,req.body.body);
     promise.then((note)=>{
         res.redirect('/notes/view?notekey='+note.key);
         })

@@ -9,10 +9,10 @@
 <input type='hidden' name='docreate' value='<%= docreate?"create":"update" %>'>
 <p>Key:
 <% if(docreate) { %>
-    <input type='text' name='notekey' value=''/>
+    <input type='text' name='noteKey' value=''/>
 <% } else { %>
-    <%= node?noteKey: "" %>
-    <input type='hidden' name='notekey' value='<%=note?notekey:""%>'>
+    <%= note?noteKey: "" %>
+    <input type='hidden' name='noteKey' value='<%=note?noteKey:""%>'>
 <% } %>
 </p>
 <p>Title: <input type='text' name='title' value='<%=note?note.title:""%>' /></p>
