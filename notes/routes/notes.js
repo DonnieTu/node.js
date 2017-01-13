@@ -9,7 +9,7 @@ rounter.get('/add',(req,res,next) => {
     res.render('noteedit',{
         title:"add a note",
         docreate: true,
-        notekey: "",
+        noteKey: "",
         note:undefined
     });
 });
@@ -36,13 +36,13 @@ rounter.post('/save',(req,res,next)=>{
     else
         promise=notes.update(req.body.noteKey,req.body.title,req.body.body);
     promise.then((note)=>{
-        res.redirect('/notes/view?notekey='+note.key);
+        res.redirect('/notes/view?noteKey='+note.key);
         })
     .catch(err=>next(err));
 });
 
 rounter.get('/view',(req,res,next)=>{
-    notes.read(req.query.notekey)
+    notes.read(req.query.noteKey)
     .then((note)=>{
         res.render('noteview',{
             title:note.title,
