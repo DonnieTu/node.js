@@ -14,4 +14,25 @@ rounter.get('/add',(req,res,next) => {
     });
 });
 
+rounter.post('/save',(req,res,next)=>{
+    var promise;
+    if(req.body.docreate=='create') 
+        promise=notes.create(req.body.notekey,req.body.title,req.body.body);
+    else
+        promise=notes.update(req.body.notekey,req.body.title,req.body.body);
+    promise.then((note)=>{
+        res.redirect('/notes/view?notekey='+note.key);
+        })
+    .catch(err=>next(err));
+});
+
+rounter.get('/view',(req,res,next)=>{
+    notes.read(req.query.notekey)
+    .then(note=>{res.render('noteview',{
+            note:node
+        });
+    })
+    .catch(err=>next(err));
+});
+
 module.exports=rounter;

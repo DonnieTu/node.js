@@ -1,5 +1,5 @@
 'use strict';
-module.expoers=class Node {
+module.exports=class Node {
     constructor(key,title,body) {
         this.key=key;
         this.title=title;
