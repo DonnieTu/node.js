@@ -22,7 +22,7 @@ exports.read=function(key) {
 
 exports.destory=function(key) {
     return new Promise((resolve,reject)=>{
-        if(nodes[key]){
+        if(notes[key]){
             delete notes[key];
             resolve();
         } else {

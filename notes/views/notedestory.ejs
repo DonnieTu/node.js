@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include headerStuff %>
+</head>
+<body>
+<% include pageHeader %>
+<form method='POST' action='/notes/destory/confirm'>
+<input type='hidden' name='noteKey' value='<%= noteKey%>'>
+<p> Delete <%= note.title %>? </p>
+<br/>
+<input type='submit' value='DELETE' /> <a href='/notes/view?noteKey=<%= noteKey%>'>Cancel</a>
+</form>
+<% include footer%>
+</body>
+</html>

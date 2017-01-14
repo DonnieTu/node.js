@@ -52,4 +52,22 @@ rounter.get('/view',(req,res,next)=>{
     .catch(err=>next(err));
 });
 
+rounter.get('/destory',(req,res,next)=>{
+    notes.read(req.query.noteKey)
+    .then(note=>{
+        res.render('notedestory',{
+            title:note?note.title:'',
+            noteKey:note?note.key:'',
+            note:note
+        });
+    })
+    .catch(err=>next(err));
+});
+
+rounter.post('/destory/confirm',(req,res,next)=>{
+    notes.destory(req.body.noteKey)
+    .then(()=>res.redirect('/'))
+    .catch(err=>next(err));
+});
+
 module.exports=rounter;
