@@ -6,11 +6,11 @@
   <body>
     <% include pageHeader %>
   
-    <h3><% note?note.title:'' %></h3>
+    <h3><%= note?note.title:'' %></h3>
     <p><%= note?note.body:'' %></p>
     <p>Key: <%= note?note.key:'' %> </p>
 
-    <% if(note.key) { %>
+    <% if(note?note.key:'') { %>
         <hr/>
         <p>
             <a href="/notes/destory?noteKey=<%= note.key%>">Delete</a>
