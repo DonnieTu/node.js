@@ -29,7 +29,7 @@ rounter.get('/edit',(req,res,next)=>{
             note:note,
             breadcrumbs: [
                 {href:'/',text:'Home'},
-                {active:ture,text:note.title}
+                {active:true,text:note.title}
             ]
         });
     })
