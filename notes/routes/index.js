@@ -10,7 +10,13 @@ router.get('/', function(req, res, next) {
     return notes.read(key);
   })
   .then(notelist=>{
-      res.render('index', { title: 'Node',notelist:notelist });
+      res.render('index', { 
+        title: 'Node',
+        notelist:notelist,
+        breadcrumbs: [
+          {href: '/',text:'Home'}
+        ]
+      });
   })
   .catch(err=>{next(err);});
 });

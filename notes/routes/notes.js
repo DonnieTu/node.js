@@ -10,18 +10,27 @@ rounter.get('/add',(req,res,next) => {
         title:"add a note",
         docreate: true,
         noteKey: "",
-        note:undefined
+        note:undefined,
+        breadcrumbs: [
+            {href:'/',text:'Home'},
+            {active:true, text: 'Add Note'}
+        ],
+        hideAddNote:true     
     });
 });
 
 rounter.get('/edit',(req,res,next)=>{
-    notes.read(req.query.key)
+    notes.read(req.query.noteKey)
     .then((note)=>{
         res.render('noteedit',{
             title:"edit a note",
             docreate: false,
             noteKey:note.key,
-            note:note
+            note:note,
+            breadcrumbs: [
+                {href:'/',text:'Home'},
+                {active:ture,text:note.title}
+            ]
         });
     })
     .catch(err=>{
@@ -46,7 +55,11 @@ rounter.get('/view',(req,res,next)=>{
     .then((note)=>{
         res.render('noteview',{
             title:note.title,
-            note:note
+            note:note,
+            breadcrumbs: [
+                { href:'/',text:'Home'},
+                {active:true, text:note.title}    
+            ]
         });
     })
     .catch(err=>next(err));
@@ -58,7 +71,11 @@ rounter.get('/destory',(req,res,next)=>{
         res.render('notedestory',{
             title:note?note.title:'',
             noteKey:note?note.key:'',
-            note:note
+            note:note,
+            breadcrumbs:[
+                {href:'/',text:'Home'},
+                {active:true,text:'Delete Note'}
+            ]
         });
     })
     .catch(err=>next(err));
