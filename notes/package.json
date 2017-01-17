@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "start-fs":"NODE_MODEL=model/notes-fs node ./bin/www",
     "postinstall": "./node_modules/.bin/bower install",
-    "bootstrapsetup":"cd bower_components/bootstrap && npm install && npm install grunt-cli",
-    "buildbootstrap":"cp variables.less bower_components/bootstrap/less && cd bower_components/bootstrap && ./node_modules/.bin/grunt"
+    "bootstrapsetup": "cd bower_components/bootstrap && npm install && npm install grunt-cli",
+    "buildbootstrap": "cp variables.less bower_components/bootstrap/less && cd bower_components/bootstrap && ./node_modules/.bin/grunt"
   },
   "dependencies": {
     "bluebird": "^3.4.7",
@@ -16,6 +17,7 @@
     "debug": "~2.2.0",
     "ejs": "~2.5.2",
     "express": "~4.14.0",
+    "fs-extra": "^2.0.0",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
   },

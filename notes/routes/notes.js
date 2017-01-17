@@ -2,8 +2,14 @@
 
 var util=require('util');
 var express=require('express');
+var path=require('path');
+var notes=require(process.env.NOTES_MODEL
+    ?path.join('..',process.env.NOTES_MODEL)
+    :"../models/notes-memory");
+var log=require('debug')('notes:routes-notes');
+var error=require('debug')('notes:error');
+
 var rounter=express.Router();
-var notes=require('../models/notes-memory');
 
 rounter.get('/add',(req,res,next) => {
     res.render('noteedit',{

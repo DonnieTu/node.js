@@ -1,6 +1,13 @@
 var express = require('express');
+var path=require('path');
+var notes=require(process.env.NOTES_MODEL
+  ?path.join('..',process.env.NOTES_MODEL)
+  :'../models/notes-memory');
+var log=require('debug') ('notes:reouter-home');
+var error=require('debug')('notes:error');
+
 var router = express.Router();
-var notes=require('../models/notes-memory');
+
 
 
 /* GET home page. */
