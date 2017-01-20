@@ -36,3 +36,4 @@ bower_components
 
 #storage file
 notes-fs-data/*.json
+notes.levelup/*

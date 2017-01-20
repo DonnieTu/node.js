@@ -17,6 +17,17 @@
         },
         {
             "type": "node",
+            "request": "launch",
+            "name": "Launch Program with levelup",
+            "program": "${workspaceRoot}/bin/www",
+            "cwd": "${workspaceRoot}",
+            "env": {
+                "DEBUG":"notes:*",
+                "NOTES_MODEL":"models/notes-levelup"
+            }
+        },
+        {
+            "type": "node",
             "request": "attach",
             "name": "Attach to Process",
             "port": 5858
