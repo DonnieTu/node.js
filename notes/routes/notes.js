@@ -88,7 +88,7 @@ rounter.get('/destory',(req,res,next)=>{
 });
 
 rounter.post('/destory/confirm',(req,res,next)=>{
-    notes.destory(req.body.noteKey)
+    notes.destroy(req.body.noteKey) 
     .then(()=>res.redirect('/'))
     .catch(err=>next(err));
 });

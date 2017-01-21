@@ -49,7 +49,7 @@ exports.read=function(key) {
     });
 };
 
-exports.destory=function(key) {
+exports.destroy=function(key) {
     return connectDB().then(()=>{
         return new Promise((resolve,reject)=>{
             db.delete(key,err=>{

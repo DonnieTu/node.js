@@ -28,6 +28,18 @@
         },
         {
             "type": "node",
+            "request": "launch",
+            "name": "Launch Program with sqlite",
+            "program": "${workspaceRoot}/bin/www",
+            "cwd": "${workspaceRoot}",
+            "env": {
+                "DEBUG":"notes:*",
+                "NOTES_MODEL":"models/notes-sqlite3",
+                "SQLITE_FILE": "chap07.sqlite3"
+            }
+        },
+        {
+            "type": "node",
             "request": "attach",
             "name": "Attach to Process",
             "port": 5858

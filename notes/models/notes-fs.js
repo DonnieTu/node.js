@@ -63,7 +63,7 @@ exports.read=function(key) {
     })
 };
 
-exports.destory=function (key) {
+exports.destroy=function (key) {
     return notesDir().then(notesdir=>{
         return new Promise((resolve,reject)=>{
             fs.unlink(filePath(nodesdir,key),err=>{
