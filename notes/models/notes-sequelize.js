@@ -10,15 +10,14 @@ const log=require('debug')('notes:sequelize-model');
 const error=require('debug')('notes:error');
 
 const Note=require('./notes');
-
-exports.connectDB=function() {
+function connectDB() {
     var SQNote;
     var sequlz;
 
     if(SQNote) return SQNote.sync();
 
     return new Promise((resolve,reject)=>{
-        fs.readFile(process.evn.SEQUELIZE_CONNECT,'utf8',
+        fs.readFile(process.env.SEQUELIZE_CONNECT,'utf8',
         (err,data)=>{
             if(err) reject(err);
             else resolve(data);
@@ -30,7 +29,7 @@ exports.connectDB=function() {
     .then(params=>{
         sequlz=new Sequelize(params.dbname,params.username,params.password,params.params);
         SQNote=sequlz.define('notes',{
-            notekey: {
+            key: {
                 type:Sequelize.STRING,
                 primaryKey:true,
                 unique:true
@@ -45,7 +44,7 @@ exports.connectDB=function() {
 exports.create=function(key,title,body) {
     return connectDB().then((SQNote)=>{
         return SQNote.create({
-            notekey:key,
+            key:key,
             title:title,
             body:body
         });
@@ -54,7 +53,7 @@ exports.create=function(key,title,body) {
 
 exports.update=function(key,title,body) {
     return connectDB().then((SQNote)=>{
-        SQNote.findById(key)
+        return SQNote.findById(key)
         .then(note=>{
             if(!note) {
                 throw new Error("no note found for key "+key);
@@ -74,29 +73,29 @@ exports.read=function(key) {
             if(!note) 
                 throw new Error("no note found for key "+ key);
             else {
-                return new Note(note.notekey,note.title,note.body);
+                return new Note(note.key,note.title,note.body);
             }
         });
     });
 };
 
-exports.destory=function(key) {
+exports.destroy=function(key) {
     return connectDB().then((SQNote)=>{
         return SQNote.findById(key)
         .then(note=>{
             if(!note) 
                 throw new Error("no note found for key "+key);
             else
-                return note.destory();
+                return note.destroy();
         });
     });
 };
 
 exports.keylist=function() {
     return connectDB().then((SQNote)=>{
-       return SQNote.findAll({attributes:['notekey']})
+       return SQNote.findAll({attributes:['key']})
        .then((notes)=>{
-           return notes.map(note=>note.notekey);
+           return notes.map(note=>note.key);
        });
     });
 };

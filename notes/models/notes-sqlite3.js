@@ -4,7 +4,7 @@ const util=require('util');
 const sqlite3=require('sqlite3');
 const Promise=require('bluebird');
 
-const log=require('debug')('notes:levelup-model');
+const log=require('debug')('notes:sqlite3-model');
 const error=require('debug')('notes:error');
 
 const Note=require('./notes');
@@ -30,7 +30,7 @@ exports.create=function(key,title,body) {
    return connectDB().then(()=>{
     var note=new Note(key,title,body);
     return new Promise((resolve,reject)=>{
-        db.run("INSERT INTO notes (notekey,title,body) "+
+        db.run("INSERT INTO notes (key,title,body) "+
             "VALUES (?,?,?);",
             [key,title,body],err=>{
                 if(err) reject(err);
@@ -47,7 +47,7 @@ exports.update=function(key,title,body) {
     return connectDB().then(()=>{
         var note=new Note(key,title,body);
         return new Promise((resolve,reject)=>{
-            db.run("UPDATE notes SET title=?,body=? where notekey=?",
+            db.run("UPDATE notes SET title=?,body=? where key=?",
             [title,body,key],err=>{
                 if(err) reject(err);
                 else {
@@ -62,11 +62,11 @@ exports.update=function(key,title,body) {
 exports.read=function(key) {
     return connectDB().then(()=>{
         return new Promise((resolve,reject)=>{
-            db.get("SELECT * FROM notes where notekey=?",
+            db.get("SELECT * FROM notes where key=?",
                 [key], (err,data)=>{
                     if(err) reject(err);
                     else {
-                        var note=new Note(data.notekey,data.title,data.body);
+                        var note=new Note(data.key,data.title,data.body);
                         log('read '+util.inspect(note));
                         resolve(note);
                     }
@@ -78,7 +78,7 @@ exports.read=function(key) {
 exports.destroy=function(key) {
     return connectDB().then(()=>{
         return new Promise((resolve,reject)=>{
-            db.run("DELETE  FROM notes WHERE notekey=?",[key],err=>{
+            db.run("DELETE  FROM notes WHERE key=?",[key],err=>{
                 if(err) reject(err);
                 else {
                     log('delete '+ key);
@@ -93,11 +93,11 @@ exports.keylist=function() {
     return connectDB().then(()=>{
         return new Promise((resolve,reject)=>{
             var keys=[];
-            db.each('SELECT notekey FROM notes',
+            db.each('SELECT key FROM notes',
                 (err,row)=>{
                     if(err) reject(err);
                     else {
-                        keys.put(row.notekey);
+                        keys.put(row.key);
                     }
                 },
                 (err,number)=>{
@@ -113,7 +113,7 @@ exports.keylist=function() {
 exports.count=function() {
     return connectDB().then(()=>{
         return new Promise((resolve,reject)=>{
-            db.run("SELECT count(notekey) as count FROM notes",(err,row)=>{
+            db.run("SELECT count(key) as count FROM notes",(err,row)=>{
                 if(err) reject(err);
                 else {
                     resolve(row.count);

@@ -53,7 +53,9 @@ rounter.post('/save',(req,res,next)=>{
     promise.then((note)=>{
         res.redirect('/notes/view?noteKey='+note.key);
         })
-    .catch(err=>next(err));
+    .catch(err=>{
+        next(err);
+    });
 });
 
 rounter.get('/view',(req,res,next)=>{
