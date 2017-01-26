@@ -9,6 +9,7 @@
     "sqlite3-setup": "sqlite3 chap07.sqlite3 --init models/schema-sqlite3.sql",
     "start-sqlite3": "SQLITE_FILE=chap07.sqlite3 NOTE_MODEL=models/notes-sqlite3 node ./bin/www",
     "start-sequenlize-sqlite3": "SEQUELIZE_CONNECT=models/sequelize-sqlite.yaml NOTE_MODEL=models/notes-sequelize node ./bin/www",
+    "start-sequenlize-mysql": "SEQUELIZE_CONNECT=models/sequelize-mysql.yaml NOTE_MODEL=models/notes-sequelize node ./bin/www",
     "postinstall": "./node_modules/.bin/bower install",
     "bootstrapsetup": "cd bower_components/bootstrap && npm install && npm install grunt-cli",
     "buildbootstrap": "cp variables.less bower_components/bootstrap/less && cd bower_components/bootstrap && ./node_modules/.bin/grunt"
@@ -26,6 +27,7 @@
     "leveldown": "^1.5.3",
     "levelup": "^1.3.3",
     "morgan": "~1.7.0",
+    "mysql": "^2.13.0",
     "sequelize": "^3.29.0",
     "serve-favicon": "~2.3.0",
     "sqlite3": "^3.1.8"

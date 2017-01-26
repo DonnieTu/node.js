@@ -62,6 +62,9 @@ exports.update=function(key,title,body) {
                 note.body=body;
                 return note.save();
             }
+        })
+        .then(note=>{
+            return new Note(note.key,note.title,note.body);
         });
     });
 };

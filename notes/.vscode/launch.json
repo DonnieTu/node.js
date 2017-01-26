@@ -41,13 +41,25 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program with sequelize",
+            "name": "Launch Program with sequelize-sqlite",
             "program": "${workspaceRoot}/bin/www",
             "cwd": "${workspaceRoot}",
             "env": {
                 "DEBUG":"notes:*",
                 "NOTES_MODEL":"models/notes-sequelize",
                 "SEQUELIZE_CONNECT":"models/sequelize-sqlite.yaml"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program with sequelize-mysql",
+            "program": "${workspaceRoot}/bin/www",
+            "cwd": "${workspaceRoot}",
+            "env": {
+                "DEBUG":"notes:*",
+                "NOTES_MODEL":"models/notes-sequelize",
+                "SEQUELIZE_CONNECT":"models/sequelize-mysql.yaml"
             }
         },
         {
