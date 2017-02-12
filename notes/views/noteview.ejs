@@ -4,22 +4,24 @@
     <% include headerStuff %>
   </head>
   <body>
+    <div class="container-fluid">
     <% include pageHeader %>
   
+    <div class="row"><div class="col-xs-12">
     <h3><%= note?note.title:'' %></h3>
     <p><%= note?note.body:'' %></p>
     <p>Key: <%= note?note.key:'' %> </p>
+    </div></div>
 
     <% if(note?note.key:'') { %>
-        <hr/>
-        <p>
-            <a href="/notes/destory?noteKey=<%= note.key%>">Delete</a>
-            <a href="/notes/edit?noteKey=<%= note.key %>">Edit</a>
-        </p>
+        <div class="row">
+        <div class="btn-group col-sm-12">
+            <a class='btn btn-default' href="/notes/destory?noteKey=<%= note.key%>" role="button">Delete</a>
+            <a class='btn btn-default' href="/notes/edit?noteKey=<%= note.key %>" role="button">Edit</a>
+        </div></div>
     <%} %>
 
-
-
     <% include footer %>
+    </div>
   </body>
 </html>
