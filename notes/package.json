@@ -10,6 +10,7 @@
     "start-sqlite3": "SQLITE_FILE=chap07.sqlite3 NOTE_MODEL=models/notes-sqlite3 node ./bin/www",
     "start-sequenlize-sqlite3": "SEQUELIZE_CONNECT=models/sequelize-sqlite.yaml NOTE_MODEL=models/notes-sequelize node ./bin/www",
     "start-sequenlize-mysql": "SEQUELIZE_CONNECT=models/sequelize-mysql.yaml NOTE_MODEL=models/notes-sequelize node ./bin/www",
+    "start-mongodb": "MONGO_URL=mongodb://localhost/chap07 NOTE_MODEL=models/notes-mongodb node ./bin/www",
     "postinstall": "./node_modules/.bin/bower install",
     "bootstrapsetup": "cd bower_components/bootstrap && npm install && npm install grunt-cli",
     "buildbootstrap": "cp variables.less bower_components/bootstrap/less && cd bower_components/bootstrap && ./node_modules/.bin/grunt"
