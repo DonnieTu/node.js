@@ -2,8 +2,10 @@
   "name": "user-auth-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "user-server.js",
   "scripts": {
+    "start": "DEBUG=users:* PORT=33333 SEQUELIZE_CONNECT=sequelize-sqlite.yaml node user-server",
+    "users-add": "PORT=33333 node users-add",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
