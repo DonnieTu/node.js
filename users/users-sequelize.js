@@ -34,7 +34,7 @@ exports.connectDB=function() {
             giveName:Sequelize.STRING,
             middleName:Sequelize.STRING,
             emails:Sequelize.STRING(2048),
-            photos:Selection.STRING(2048)
+            photos:Sequelize.STRING(2048)
         });
         return SQUser.sync();
     });
