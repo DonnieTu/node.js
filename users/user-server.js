@@ -22,7 +22,7 @@ server.listen(process.env.PORT,"localhost",function(){
 });
 
 server.post('/create-user',(req,res,next)=>{
-    log('post for create-user');
+    log('post /create-user');
     usersModel.create(req.params.username,req.params.password,
         req.params.provider,req.params.lastName,
         req.params.givenName,req.params.middleName,
@@ -37,6 +37,75 @@ server.post('/create-user',(req,res,next)=>{
         err(err.stack);
         next(false);
     });
+});
+
+server.post('/update-user/:username', (req,res,next)=>{
+    log('post /update-user/');
+    usersModel.update(req.params.username,req.params.password,
+        req.params.provider,req.params.lastName,
+        req.params.givenName,req.params.middleName,
+        req.params.emails,req.params.photos)
+    .then(result=>{
+        log('update '+util.inspect(result));
+        res.send(result);
+        next(false);
+    })
+    .catch(err=>{
+        res.send(500,err);
+        err(err.stack);
+        next(false);
+    });
+});
+
+server.post('/find-or-create',(req,res,next)=>{
+    log('post /find-or-create');
+    usersModel.findOrCreate({
+        req.params.username,req.params.password,
+        req.params.provider,req.params.lastName,
+        req.params.givenName,req.params.middleName,
+        req.params.emails,req.params.photos})
+    .then(result=>{
+        log('find-or-create',util.inspect(result));
+        res.send(result);
+        next(false);
+    })
+    .catch(err=>{
+        res.send(500,err);
+        err(err.stack);
+        next(false);
+    });
+});
+
+server.get('/find/:username',(req,res,next)=>{
+    log("get /find/:username");
+    usersModel.find(req.params.username)
+    .then(result=>{
+        if(result)
+            res.send(result);
+        else 
+            res.send(404, new Error("Did not find "+req.params.username));
+        next(false);
+    })
+    .catch(err=>{
+        res.send(500,err);
+        error(err.stack);
+        next(false);
+    });
+});
+
+
+server.get('/destory/:username',(req,res,next)=>{
+    log('get /destory/:username');
+    usersModel.destory(req.params.username)
+    .then(()=>{
+        res.send({});
+        next(false);
+    })
+    .catch(err=>{
+        res.send(500,err);
+        error(err.stack);
+        next(false);
+    })
 });
 
 var apiKeys = [ {
