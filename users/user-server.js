@@ -60,10 +60,15 @@ server.post('/update-user/:username', (req,res,next)=>{
 server.post('/find-or-create',(req,res,next)=>{
     log('post /find-or-create');
     usersModel.findOrCreate({
-        req.params.username,req.params.password,
-        req.params.provider,req.params.lastName,
-        req.params.givenName,req.params.middleName,
-        req.params.emails,req.params.photos})
+            username:req.params.username,
+            password:req.params.password,
+            provider:req.params.provider,
+            lastName:req.params.lastName,
+            givenname:req.params.givenName,
+            middleName:req.params.middleName,
+            emails:req.params.emails,
+            photos:req.params.photos
+    })
     .then(result=>{
         log('find-or-create',util.inspect(result));
         res.send(result);
@@ -106,6 +111,34 @@ server.get('/destory/:username',(req,res,next)=>{
         error(err.stack);
         next(false);
     })
+});
+
+server.post('/passwordCheck',(req,res,next)=>{
+    log('passwordCheck');
+    usersModel.userPasswordCheck(req.params.username,req.params.password)
+    .then(result=>{
+        res.send(result);
+        next(false);
+    })
+    .catch(err=>{
+        res.send(500,err);
+        error(err.stack);
+        next(false);
+    });
+});
+
+server.get('/list',(req,res,next)=>{
+    log('list');
+    usersModel.listUsers()
+    .then(users=>{
+        res.send(users);
+        next(false);
+    })
+    .catch(err=>{
+        res.send(500,err);
+        error(err.stack);
+        next(false);
+    });
 });
 
 var apiKeys = [ {
