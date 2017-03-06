@@ -34,7 +34,7 @@ server.post('/create-user',(req,res,next)=>{
     })
     .catch(err=>{
         res.send(500,err);
-        err(err.stack);
+        error(err.stack);
         next(false);
     });
 });
@@ -52,7 +52,7 @@ server.post('/update-user/:username', (req,res,next)=>{
     })
     .catch(err=>{
         res.send(500,err);
-        err(err.stack);
+        error(err.stack);
         next(false);
     });
 });
@@ -60,6 +60,7 @@ server.post('/update-user/:username', (req,res,next)=>{
 server.post('/find-or-create',(req,res,next)=>{
     log('post /find-or-create');
     usersModel.findOrCreate({
+            id:req.params.username,
             username:req.params.username,
             password:req.params.password,
             provider:req.params.provider,
@@ -76,7 +77,7 @@ server.post('/find-or-create',(req,res,next)=>{
     })
     .catch(err=>{
         res.send(500,err);
-        err(err.stack);
+        error(err.stack);
         next(false);
     });
 });
@@ -131,6 +132,7 @@ server.get('/list',(req,res,next)=>{
     log('list');
     usersModel.listUsers()
     .then(users=>{
+        if(!users) users=[];
         res.send(users);
         next(false);
     })

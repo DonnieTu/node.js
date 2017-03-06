@@ -81,7 +81,7 @@ exports.find=function(username) {
         return SQUser.findOne({where: {username:username}});
     })
     .then(user=>{
-        user?exports.sanitizedUser(user):undefined;
+        return user?exports.sanitizedUser(user):undefined;
     });
 };
 
@@ -137,11 +137,13 @@ exports.sanitizedUser = function(user) {
 };
 
 exports.listUsers=function(){
-    exports.connectDB()
+    return exports.connectDB()
     .then(SQUser=>SQUser.findAll({}))
-    .then(users=>users.map(
-        user=>exports.sanitizedUser(user))
-    )
+    .then(users=>{
+        //if(users.length==0) return users;
+        return users.map(user=>{
+            return exports.sanitizedUser(user);});
+    })
     .catch(err=>error(err));
 };
 
