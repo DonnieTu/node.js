@@ -8,7 +8,7 @@ var FileStreamRotator=require('file-stream-rotator');
 var error=require('debug')('notes:error');
 
 var index = require('./routes/index');
-//var users = require('./routes/users');
+var users = require('./routes/users');
 var notes=require('./routes/notes');
 
 var app = express();
@@ -48,7 +48,7 @@ app.use('/vendor/bootstrap',express.static(
   path.join(__dirname,'bower_components','bootstrap','dist')));
 app.use('/vendor/jquery',express.static(
   path.join(__dirname,'bower_components','jquery','dist')));
-//app.use('/users', users);
+app.use('/users', users.router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
