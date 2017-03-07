@@ -62,3 +62,50 @@ exports.find=function(username) {
         });
     });
 };
+
+
+exports.userPasswordCheck=function(username,password) {
+    return connectREST().then(client=>{
+        return new Promises((resolve,reject)=>{
+            client.post('/passwordCheck',{
+                username,password
+            },
+            (err,req,res,object)=>{
+                if(err) reject(err);
+                resolve(object);
+            })
+        });
+    });
+};
+
+exports.findOrCreate=function(profile) {
+    return connectREST().then(client=>{
+        return new Promises((resolve,reject)=>{
+            client.post('/find-or-create',{
+                username:profile.id,
+                password:profile.password,
+                provider: profile.provider,
+                familyName: profile.familyName,
+                givenName: profile.givenName,
+                middleName: profile.middleName,
+                emails: profile.emails, photos: profile.photos
+            },
+            (err,req,res,object)=>{
+                if(err) return reject(err);
+                resolve(obj);
+            });
+        });
+    });
+};
+
+exports.listUsers=function() {
+    return connectREST().then(client=>{
+        return new Promises((resolve,reject)=>{
+            client.get('/list',
+            (err,req,res,obj)=>{
+                if(err) reject(err);
+                resolve(object);
+            });
+        });
+    });
+};
