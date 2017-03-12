@@ -11,7 +11,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var notes=require('./routes/notes');
 const session=require('express-session');
-const FireStore=require('session-file-store')(session);
+const FileStore=require('session-file-store')(session);
 
 var app = express();
 
