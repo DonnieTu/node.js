@@ -6,6 +6,7 @@
 <body>
 <% include pageHeader %>
 <div class='row'><div class='col-xs-12'>
+<% if (user) %>
 <form method='POST' action='/notes/save'>
 <input type='hidden' name='docreate' value='<%= docreate?"create":"update" %>'>
 <div class="form-group">
@@ -28,6 +29,10 @@
 
 <input type='submit' value='Submit'/>
 </form>
+<% } else { %>
+    <% include not-logged-in %>
+<%} %>
+</div></div>
 
 
 <% include footer %>

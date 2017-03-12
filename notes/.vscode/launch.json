@@ -72,7 +72,9 @@
             "env": {
                 "DEBUG":"notes:*",
                 "NOTES_MODEL":"models/notes-sequelize",
-                "SEQUELIZE_CONNECT":"models/sequelize-mysql.yaml"
+                "SEQUELIZE_CONNECT":"models/sequelize-mysql.yaml",
+                "USERS_MODEL":"models/users-rest",
+                "USER_SERVICE_URL":"http://localhost:33333"
             }
         },
         {

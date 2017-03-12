@@ -10,6 +10,8 @@ var error=require('debug')('notes:error');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var notes=require('./routes/notes');
+const session=require('express-session');
+const FireStore=require('session-file-store')(session);
 
 var app = express();
 
@@ -42,13 +44,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  store:new FileStore({path:"sessions"}),
+  secret:'keyboard mouse',
+  resave:true,
+  saveUninitialized:true
+}));
+users.initPassport(app);
+
 app.use('/', index);
+app.use('/users', users.router);
 app.use('/notes',notes);
 app.use('/vendor/bootstrap',express.static(
   path.join(__dirname,'bower_components','bootstrap','dist')));
 app.use('/vendor/jquery',express.static(
   path.join(__dirname,'bower_components','jquery','dist')));
-app.use('/users', users.router);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

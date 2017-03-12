@@ -4,7 +4,7 @@
   "description": "",
   "main": "user-server.js",
   "scripts": {
-    "start": "DEBUG=users:* PORT=33333 SEQUELIZE_CONNECT=sequelize-sqlite.yaml node user-server",
+    "start": "cross-env DEBUG=users:* PORT=33333 SEQUELIZE_CONNECT=sequelize-sqlite.yaml node user-server",
     "users-add": "PORT=33333 node users-add",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,5 +17,8 @@
     "restify": "^4.3.0",
     "sequelize": "^3.30.0",
     "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {
+    "cross-env": "^3.2.3"
   }
 }

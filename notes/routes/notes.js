@@ -8,15 +8,17 @@ var notes=require(process.env.NOTES_MODEL
     :"../models/notes-memory");
 var log=require('debug')('notes:routes-notes');
 var error=require('debug')('notes:error');
+const usersRouter=require('./users');
 
 var rounter=express.Router();
 
-rounter.get('/add',(req,res,next) => {
+rounter.get('/add',usersRouter.ensureAuthenticated,(req,res,next) => {
     res.render('noteedit',{
         title:"add a note",
         docreate: true,
         noteKey: "",
         note:undefined,
+        user: req.user ? req.user : undefined,
         breadcrumbs: [
             {href:'/',text:'Home'},
             {active:true, text: 'Add Note'}
@@ -33,18 +35,19 @@ rounter.get('/edit',(req,res,next)=>{
             docreate: false,
             noteKey:note.key,
             note:note,
+            user: req.user?req.user:undefined,
             breadcrumbs: [
                 {href:'/',text:'Home'},
                 {active:true,text:note.title}
             ]
         });
     })
-    .catch(err=>{
+    .catch(err=>{s
         next(err);
     });
 });
 
-rounter.post('/save',(req,res,next)=>{
+rounter.post('/save',usersRouter.ensureAuthenticated,(req,res,next)=>{
     var promise;
     if(req.body.docreate=='create') 
         promise=notes.create(req.body.noteKey,req.body.title,req.body.body);
@@ -64,6 +67,7 @@ rounter.get('/view',(req,res,next)=>{
         res.render('noteview',{
             title:note.title,
             note:note,
+            user: req.user?req.user:undefined,
             breadcrumbs: [
                 { href:'/',text:'Home'},
                 {active:true, text:note.title}    
@@ -80,6 +84,7 @@ rounter.get('/destory',(req,res,next)=>{
             title:note?note.title:'',
             noteKey:note?note.key:'',
             note:note,
+            user: req.user?req.user:undefined,
             breadcrumbs:[
                 {href:'/',text:'Home'},
                 {active:true,text:'Delete Note'}
