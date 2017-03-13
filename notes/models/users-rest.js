@@ -4,13 +4,12 @@ const util=require('util');
 const restify=require('restify');
 const log=require('debug')('notes:users-rest-client');
 const error=require("debug")('notes:error');
+const Promise=require('bluebird');
 
 var connectREST=function() {
-
-
     return new Promise((resolve,reject)=>{
         try {
-            reslove(restify.createJsonClient({
+            resolve(restify.createJsonClient({
                 url:process.env.USER_SERVICE_URL,
                 version:'*'
             }));
@@ -66,21 +65,21 @@ exports.find=function(username) {
 
 exports.userPasswordCheck=function(username,password) {
     return connectREST().then(client=>{
-        return new Promises((resolve,reject)=>{
+        return new Promise((resolve,reject)=>{
             client.post('/passwordCheck',{
                 username,password
             },
             (err,req,res,object)=>{
                 if(err) reject(err);
                 resolve(object);
-            })
+            });
         });
     });
 };
 
 exports.findOrCreate=function(profile) {
     return connectREST().then(client=>{
-        return new Promises((resolve,reject)=>{
+        return new Promise((resolve,reject)=>{
             client.post('/find-or-create',{
                 username:profile.id,
                 password:profile.password,
@@ -100,7 +99,7 @@ exports.findOrCreate=function(profile) {
 
 exports.listUsers=function() {
     return connectREST().then(client=>{
-        return new Promises((resolve,reject)=>{
+        return new Promise((resolve,reject)=>{
             client.get('/list',
             (err,req,res,obj)=>{
                 if(err) reject(err);
