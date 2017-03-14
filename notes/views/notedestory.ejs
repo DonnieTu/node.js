@@ -5,7 +5,7 @@
 </head>
 <body>
 <% include pageHeader %>
-<%if (user)%>
+<%if (user) {%>
 <form method='POST' action='/notes/destory/confirm'>
 <input type='hidden' name='noteKey' value='<%= noteKey%>'>
 <p> Delete <%= note.title %>? </p>
