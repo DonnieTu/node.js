@@ -68,8 +68,8 @@ passport.serializeUser((user,done)=>{
 
 passport.deserializeUser((username,done)=>{
   usersModel.find(username)
-  .then(user=>done(null,user)
-  .catch(err=>done(err)));
+  .then(user=>done(null,user))
+  .catch(err=>done(err));
 });
 
 //module.exports = router;
