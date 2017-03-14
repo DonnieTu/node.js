@@ -11,9 +11,11 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var notes=require('./routes/notes');
 const session=require('express-session');
-const FileStore=require('session-file-store')(session);
+//const FileStore=require('session-file-store')(session);
 
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,9 +47,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  store:new FileStore({path:"sessions"}),
+ // store:new FileStore({path:"sessions"}),
   secret:'keyboard mouse',
-  resave:true,
+  resave:false,
   saveUninitialized:true
 }));
 users.initPassport(app);
