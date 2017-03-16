@@ -61,7 +61,8 @@ app.use('/vendor/bootstrap',express.static(
   path.join(__dirname,'bower_components','bootstrap','dist')));
 app.use('/vendor/jquery',express.static(
   path.join(__dirname,'bower_components','jquery','dist')));
-
+app.use('/images',express.static(
+  path.join(__dirname,'images')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
