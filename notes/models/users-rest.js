@@ -91,7 +91,7 @@ exports.findOrCreate=function(profile) {
             },
             (err,req,res,object)=>{
                 if(err) return reject(err);
-                resolve(obj);
+                resolve(object);
             });
         });
     });
@@ -101,7 +101,7 @@ exports.listUsers=function() {
     return connectREST().then(client=>{
         return new Promise((resolve,reject)=>{
             client.get('/list',
-            (err,req,res,obj)=>{
+            (err,req,res,object)=>{
                 if(err) reject(err);
                 resolve(object);
             });

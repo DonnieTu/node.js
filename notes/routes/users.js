@@ -71,7 +71,7 @@ passport.use(new LocalStrategy((username,password,done)=>{
 passport.use(new TwitterStrategy({
   consumerKey:	"K5eeZs9onMyPyNApQJXUwnAYu",
   consumerSecret: "RkjyH61qtXRDh5XpzxSrLSGon6d09I49ySeBLSCyFKeppOHRBQ",
-  callbackURL:"	http://10.148.185.17:3000/users/auth/twitter/callback"
+  callbackURL:"http://10.148.210.148:3000/users/auth/twitter/callback"
 },
 (token,tokenSecret,profile,done)=>{
   usersModel.findOrCreate({
