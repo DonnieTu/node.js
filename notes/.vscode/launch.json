@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceRoot}/bin/www",
+            "program": "${workspaceRoot}/app",
             "cwd": "${workspaceRoot}",
             "env": {
                 "DEBUG":"notes:*",
@@ -20,7 +20,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program with levelup",
-            "program": "${workspaceRoot}/bin/www",
+            "program": "${workspaceRoot}/app",
             "cwd": "${workspaceRoot}",
             "env": {
                 "DEBUG":"notes:*",
@@ -31,7 +31,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program with sqlite",
-            "program": "${workspaceRoot}/bin/www",
+            "program": "${workspaceRoot}/app.js",
             "cwd": "${workspaceRoot}",
             "env": {
                 "DEBUG":"notes:*",
@@ -43,7 +43,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program with mongo",
-            "program": "${workspaceRoot}/bin/www",
+            "program": "${workspaceRoot}/app.js",
             "cwd": "${workspaceRoot}",
             "env": {
                 "DEBUG":"notes:*",
@@ -55,7 +55,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program with sequelize-sqlite",
-            "program": "${workspaceRoot}/bin/www",
+            "program": "${workspaceRoot}/app.js",
             "cwd": "${workspaceRoot}",
             "env": {
                 "DEBUG":"notes:*",
@@ -69,7 +69,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program with sequelize-mysql",
-            "program": "${workspaceRoot}/bin/www",
+            "program": "${workspaceRoot}/app",
             "cwd": "${workspaceRoot}",
             "env": {
                 "DEBUG":"notes:*",

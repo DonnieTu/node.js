@@ -10,6 +10,7 @@ const log=require('debug')('notes:sequelize-model');
 const error=require('debug')('notes:error');
 
 const Note=require('./notes');
+
 function connectDB() {
     var SQNote;
     var sequlz;
@@ -42,12 +43,21 @@ function connectDB() {
 };
 
 exports.create=function(key,title,body) {
-    return connectDB().then((SQNote)=>{
+    return connectDB()
+    .then((SQNote)=>{
         return SQNote.create({
             key:key,
             title:title,
             body:body
+        })
+    })
+    .then(newnote=>{
+        exports.events.noteCreated({
+            key:newnote.key,
+            title:newnote.title,
+            body:newnote.body
         });
+        return newnote;
     });
 };
 
@@ -64,6 +74,11 @@ exports.update=function(key,title,body) {
             }
         })
         .then(note=>{
+            exports.events.noteUpdate({
+                key,
+                title:note.title,
+                body:note.body
+            });
             return new Note(note.key,note.title,note.body);
         });
     });
@@ -90,6 +105,9 @@ exports.destroy=function(key) {
                 throw new Error("no note found for key "+key);
             else
                 return note.destroy();
+        })
+        .then(()=>{
+            exports.events.noteDestory({key});
         });
     });
 };
@@ -111,3 +129,5 @@ exports.count=function() {
         });
     });
 };
+
+exports.events=require('./notes-events');

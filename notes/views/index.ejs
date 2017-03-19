@@ -8,7 +8,7 @@
     <% include pageHeader %>
     <% if (notelist.length>0) { %>
     <div class="row"><div class="col-xs-12">
-    <div class="btn-group-vertical" role="group" stype="width:100%">
+    <div id="notetitles" class="btn-group-vertical" role="group" stype="width:100%">
     <%for (var note of notelist) { %>
       <a class="btn btn-lg btn-block btn-default" href="/notes/view?noteKey=<%= note.key %>"> <%= note.title %></a>
     <% } %>
@@ -16,6 +16,24 @@
     </div></div>
     <% }%>
     <% include footer %>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      $(document).ready(function(){
+        var socket=io('/home');
+        socket.on('notetitles',function(data){
+          var notelist=data.notelist;
+          $('#notetitles).empty();
+          for(var i=0;i<notelist.length;i++) {
+            notedata=notelist[i];
+            $('#notelists')
+            .append('<a class='btn btn-lg btn-block btn-default' href="/notes/view?noteKey='+notekey.key+'">'+notedata.title+'</a>');
+          }
+        })；
+      });
+    </script>
+
+
     </div>
   </body>
 </html>
