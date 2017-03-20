@@ -1,3 +1,10 @@
+#!/usr/bin/env node
+
+const passportSocketIo=require("passport.socketio");
+const http=require('http');
+var log=require('debug')('notes:server');
+var error=require('debug')('notes:error');
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -5,16 +12,31 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var FileStreamRotator=require('file-stream-rotator');
-var error=require('debug')('notes:error');
-
-var index = require('./routes/index');
+var routes = require('./routes/index');
 var users = require('./routes/users');
 var notes=require('./routes/notes');
 const session=require('express-session');
-//const FileStore=require('session-file-store')(session);
+const FileStore=require('session-file-store')(session);
+
+const sessionCookie='notes.sid';
+const sessionSecret='keyboard mouse';
+const sessionStore=new FileStore({path:'sessions'});
 
 var app = express();
 
+var server=http.createServer(app);
+var io=require('socket.io')(server);
+
+io.use(passportSocketIo.authorize({
+  // store:sessionStore,
+  cookieParser:cookieParser,
+  key:sessionCookie,
+  secret:sessionSecret,
+ 
+}));
+
+var port=normalizePort(process.env.PORT||'3000');
+app.set('port',port);
 
 
 // view engine setup
@@ -46,15 +68,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use(session({
- // store:new FileStore({path:"sessions"}),
-  secret:'keyboard mouse',
-  resave:false,
+ // store:sessionStore,
+  secret:sessionSecret,
+  key:sessionCookie,
+  resave:true,
   saveUninitialized:true
 }));
 users.initPassport(app);
 
-app.use('/', index);
+app.use('/',routes);
 app.use('/users', users.router);
 app.use('/notes',notes);
 app.use('/vendor/bootstrap',express.static(
@@ -63,6 +87,9 @@ app.use('/vendor/jquery',express.static(
   path.join(__dirname,'bower_components','jquery','dist')));
 app.use('/images',express.static(
   path.join(__dirname,'images')));
+
+routes.socketio(io);
+//notes.socketio(io);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -84,3 +111,72 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  log('Listening on ' + bind);
+}
+

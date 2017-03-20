@@ -9,26 +9,40 @@ var error=require('debug')('notes:error');
 var router = express.Router();
 
 
+var getKeyTitlesList=function() {
+  return notes.keylist()
+  .map((key)=>{
+    return notes.read(key);
+  });
+}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  notes.keylist()
-  .map((key)=>{
-    return notes.read(key);
-  })
+  getKeyTitlesList()
   .then(notelist=>{
       res.render('index', { 
         title: 'Node',
         notelist:notelist,
         user: req.user ? req.user : undefined,
-        breadcrumbs: [
-          {href: '/',text:'Home'}
-        ]
+        breadcrumbs: [{href: '/',text:'Home'}]
       });
   })
-  .catch(err=>{
-    next(err);
-  });
+  .catch(err=>next(err));
 });
 
+
 module.exports = router;
+
+module.exports.socketio=function(io){
+  var emitNoteTitles=function(){
+    getKeyTitlesList()
+    .then(notelist=>{
+      io.of('/home').emit('notetitles',{notelist});
+    });
+  };
+
+  notes.events.on('notecreated',emitNoteTitles);
+  notes.events.on('noteupdate',emitNoteTitles);
+  notes.events.on('notedestroy',emitNoteTitles);
+}
+
