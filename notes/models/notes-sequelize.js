@@ -10,6 +10,7 @@ const log=require('debug')('notes:sequelize-model');
 const error=require('debug')('notes:error');
 
 const Note=require('./notes');
+exports.events = require('./notes-events');
 
 function connectDB() {
     var SQNote;
@@ -52,7 +53,7 @@ exports.create=function(key,title,body) {
         })
     })
     .then(newnote=>{
-        exports.events.noteCreated({
+        exports.events.noteCreate({
             key:newnote.key,
             title:newnote.title,
             body:newnote.body

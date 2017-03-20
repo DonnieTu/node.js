@@ -28,7 +28,7 @@ var server=http.createServer(app);
 var io=require('socket.io')(server);
 
 io.use(passportSocketIo.authorize({
-  // store:sessionStore,
+  store:sessionStore,
   cookieParser:cookieParser,
   key:sessionCookie,
   secret:sessionSecret,
@@ -70,7 +70,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use(session({
- // store:sessionStore,
+  store:sessionStore,
   secret:sessionSecret,
   key:sessionCookie,
   resave:true,

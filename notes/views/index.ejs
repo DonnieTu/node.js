@@ -23,13 +23,13 @@
         var socket=io('/home');
         socket.on('notetitles',function(data){
           var notelist=data.notelist;
-          $('#notetitles).empty();
+          $('#notetitles').empty();
           for(var i=0;i<notelist.length;i++) {
             notedata=notelist[i];
             $('#notelists')
-            .append('<a class='btn btn-lg btn-block btn-default' href="/notes/view?noteKey='+notekey.key+'">'+notedata.title+'</a>');
+            .append('<a class="btn btn-lg btn-block btn-default" href="/notes/view?noteKey='+notekey.key+'">'+notedata.title+'</a>');
           }
-        })；
+        });
       });
     </script>
 
