@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceRoot}\\bin\\www",
+            "env":{
+                "DEBUG":"notes:*",
+                "NOTES_MODEL":"models/notes-sequelize",
+                "SEQUELIZE_CONNECT":"models/sequelize-sqlite.yaml",
+                 "USERS_MODEL":"models/users-rest",
+                "USER_SERVICE_URL":"http://localhost:33333"
+            }
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach to Process",
+            "address": "localhost",
+            "port": 5858
+        }
+    ]
+}
