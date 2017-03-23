@@ -1,6 +1,6 @@
-const df=require('./deleteFile');
+const df=require('deleteFile');
 const assert=require('assert');
-
+const log=require('debug')('test');
 df.deleteFile('no-such-file',err=>{
     assert.throws(()=>{
         if(err) throw err;
@@ -14,3 +14,17 @@ df.deleteFile('no-such-file',err=>{
     'unexpected error'
     )
 });
+
+try {
+df.deleteFile('no-such-file',err=>{
+    assert.doesNotThrow(()=>{
+        if(err) throw err;
+    },
+    TypeError,
+    'unexpected error'
+    )
+});
+}
+catch(e) {
+    
+}
