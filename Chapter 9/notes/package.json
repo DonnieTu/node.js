@@ -7,6 +7,7 @@
     "start": "cross-env SEQUELIZE_CONNECT=models/sequelize-sqlite.yaml NOTES_MODEL=models/notes-sequelize USERS_MODEL=models/users-rest USER_SERVICE_URL=http://localhost:3333 node ./app",
     "start-server1": "cross-env SEQUELIZE_CONNECT=models/sequelize-sqlite.yaml NOTES_MODEL=models/notes-sequelize USERS_MODEL=models/users-rest USER_SERVICE_URL=http://localhost:3333 PORT=3000 node ./app",
     "start-server2": "cross-env SEQUELIZE_CONNECT=models/sequelize-sqlite.yaml NOTES_MODEL=models/notes-sequelize USERS_MODEL=models/users-rest USER_SERVICE_URL=http://localhost:3333 PORT=3002 node ./app",
+    "test-notes-sequlize":"cross-env SEQUELIZE_CONNECT=models/sequelize-sqlite.yaml MODEL_TO_TEST=../models/notes-sequelize mocha",
     "test-notes-memory":"cross-env MODEL_TO_TEST=../models/notes-memory mocha",
     "postinstall": "bower install",
     "bootstrapsetup": "cd bower_components/bootstrap && npm install && npm install grunt-cli ",
