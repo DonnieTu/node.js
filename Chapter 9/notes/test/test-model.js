@@ -88,4 +88,16 @@ describe("Model Test", function(){
             })
         });
     });
+
+    describe("check delete",function(){
+        it("should delete one item",function(){
+            return model.destroy('n1')
+            .then(()=>{
+                return  model.keylist()
+                .then(keys=>{
+                    assert(keys.length,2);
+                });
+            });
+        });
+    });
 });
