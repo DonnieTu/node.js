@@ -17,7 +17,7 @@
             "name": "test Program",
             "cwd":"${workspaceRoot}",
             "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-            "args":["${workspaceRoot}/test/test-model.js"],
+            "args":["${workspaceRoot}/test/test-model.js","--no-timeouts"],
             "env":{
                 "SEQUELIZE_CONNECT":"${workspaceRoot}/models/sequelize-sqlite.yaml",
                 "NOTES_MODEL":"${workspaceRoot}/models/notes-sequelize",
