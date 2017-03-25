@@ -99,5 +99,16 @@ describe("Model Test", function(){
                 });
             });
         });
+
+        it("should not delete no-existing item",function(){
+            return model.destroy("no-existing")
+            .then(()=>{
+                throw(new Error("should not be here"));
+            })
+            .catch((err)=>{
+                //right to here
+                return;
+            });
+        });
     });
 });
