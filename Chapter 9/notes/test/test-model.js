@@ -71,6 +71,7 @@ describe("Model Test", function(){
             })
             .catch(err=>{
                 //it's right here for testing
+                return;
             });
         });
     });

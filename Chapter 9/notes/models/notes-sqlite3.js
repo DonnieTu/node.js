@@ -7,6 +7,7 @@ const log     = require('debug')('notes:sqlite3-model');
 const error   = require('debug')('notes:error');
 
 const Note    = require('./Note');
+exports.events = require('./notes-events');
 
 sqlite3.verbose();
 var db; // store the database connection here
@@ -85,9 +86,14 @@ exports.read = function(key) {
                 [ key ], (err, row) => {
                 if (err) reject(err);
                 else {
-                    var note = new Note(row.notekey, row.title, row.body);
-                    log('READ '+ util.inspect(note));
-                    resolve(note);
+                    if(!row) {
+                        reject(new Error("No note found for "+key));
+                    }else {
+                        var note = new Note(row.notekey, row.title, row.body);
+                        log('READ '+ util.inspect(note));
+                        resolve(note);
+                    }
+
                 }
             });
         });

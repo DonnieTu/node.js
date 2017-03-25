@@ -20,11 +20,19 @@
             "args":["${workspaceRoot}/test/test-model.js","--no-timeouts"],
             "env":{
                 "SEQUELIZE_CONNECT":"${workspaceRoot}/models/sequelize-sqlite.yaml",
-                //"NOTES_MODEL":"${workspaceRoot}/models/notes-sequelize",
-                //"USERS_MODEL":"${workspaceRoot}/models/users-rest",
-                //"USER_SERVICE_URL":"http://localhost:3333",
-               // "PORT":"3000",
                 "MODEL_TO_TEST":"${workspaceRoot}/models/notes-sequelize"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "test sqlite3 Program",
+            "cwd":"${workspaceRoot}",
+            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+            "args":["${workspaceRoot}/test/test-model.js","--no-timeouts"],
+            "env":{
+                "MODEL_TO_TEST":"${workspaceRoot}/models/notes-sqlite3",
+                "SQLITE_FILE":"test.sqlite3"
             }
         },
         {
