@@ -20,11 +20,11 @@
             "args":["${workspaceRoot}/test/test-model.js","--no-timeouts"],
             "env":{
                 "SEQUELIZE_CONNECT":"${workspaceRoot}/models/sequelize-sqlite.yaml",
-                "NOTES_MODEL":"${workspaceRoot}/models/notes-sequelize",
-                "USERS_MODEL":"${workspaceRoot}/models/users-rest",
-                "USER_SERVICE_URL":"http://localhost:3333",
-                "MODEL_TO_TEST":"${workspaceRoot}/models/notes-sequelize",
-                "PORT":"3000"
+                //"NOTES_MODEL":"${workspaceRoot}/models/notes-sequelize",
+                //"USERS_MODEL":"${workspaceRoot}/models/users-rest",
+                //"USER_SERVICE_URL":"http://localhost:3333",
+               // "PORT":"3000",
+                "MODEL_TO_TEST":"${workspaceRoot}/models/notes-sequelize"
             }
         },
         {
