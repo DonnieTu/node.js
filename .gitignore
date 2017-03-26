@@ -36,3 +36,4 @@ bower_components
 */npmlog
 
 *.sqlite3
+Chapter 9/notes/notes-fs-data/*.json
