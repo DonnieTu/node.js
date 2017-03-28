@@ -9,8 +9,6 @@
     "start-server2": "cross-env SEQUELIZE_CONNECT=models/sequelize-sqlite.yaml NOTES_MODEL=models/notes-sequelize USERS_MODEL=models/users-rest USER_SERVICE_URL=http://localhost:3333 PORT=3002 node ./app",
     "setup-sqlite3": "sqlite3 chap07.sqlite3 --init models/schema-sqlite3.sql",
     "start-sqlite3": "cross-env SQLITE_FILE=note.sqlite3 NOTE_MODEL=models/notes-sqlite3 node app.js",
-    "testset":"cross-env rm -f test.sqlite3 && sqlite3 test.sqlite3 --init models/schema-sqlite3.sql",
-    "test-notes-sqlite3": "cross-env MODEL_TO_TEST=../models/notes-sqlite3 SQLLITE_FILE=test.sqlite3 mocha",
     "test-notes-sequlize":"cross-env SEQUELIZE_CONNECT=models/sequelize-sqlite.yaml MODEL_TO_TEST=../models/notes-sequelize mocha",
     "test-notes-fs":"cross-env MODEL_TO_TEST=../models/notes-fs mocha",
     "test-notes-memory":"cross-env MODEL_TO_TEST=../models/notes-memory mocha",
