@@ -85,14 +85,14 @@ exports.find=function(username) {
     });
 };
 
-exports.destory=function(username) {
+exports.destroy=function(username) {
     return exports.connectDB()
     .then(SQUser=>{
         return SQUser.findOne({where:{username:username}});
     })
     .then(user=>{
         if(!user) throw new Error ("Did not find requested "+username+ ' to delete');
-        user.destory();
+        user.destroy();
         return;
     });
 };

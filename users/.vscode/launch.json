@@ -19,10 +19,22 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program test",
+            "name": "Test users-add",
             "program": "${workspaceRoot}/users-add.js",
             "env":{
                 "DEBUG":"users:*",
+                "PORT":"33333"
+                },
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Test user service",
+            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+            "args":["--no-timeouts"],
+            "env":{
+                "HOST_USERS_TEST":"localhost",
                 "PORT":"33333"
                 },
             "cwd": "${workspaceRoot}"

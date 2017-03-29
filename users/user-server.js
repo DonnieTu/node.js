@@ -100,9 +100,9 @@ server.get('/find/:username',(req,res,next)=>{
 });
 
 
-server.get('/destory/:username',(req,res,next)=>{
-    log('get /destory/:username');
-    usersModel.destory(req.params.username)
+server.del('/destroy/:username',(req,res,next)=>{
+    log('del /destroy/:username');
+    usersModel.destroy(req.params.username)
     .then(()=>{
         res.send({});
         next(false);

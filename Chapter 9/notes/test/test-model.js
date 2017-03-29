@@ -3,6 +3,8 @@ const assert=require('chai').assert;
 const model=require(process.env.MODEL_TO_TEST);
 
 
+debugger;
+
 describe("Model Test", function(){
     beforeEach(function(){
         return model.keylist()
