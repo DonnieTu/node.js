@@ -57,4 +57,46 @@ describe("Users Test",function(){
             });
         });
     });
+
+    describe("find user",function(){
+        it("find created users",function(){
+            return new Promise((resolve,reject)=>{
+                userClient.get('/find/me',(err,req,res,obj)=>{
+                    if(err) reject();
+                    else if(!obj) 
+                        reject(new Error("me should exist"));
+                    else 
+                        resolve();
+                });
+            });
+        });
+
+        it("fail to find non-existent users",function(){
+            return new Promise((resolve,reject)=>{
+                userClient.get("/find/nonExistenUser",(err,req,res,obj)=>{
+                    if(err) 
+                        resolve();
+                    else 
+                        reject(new Error("nonExistenceUser should not exist"));
+                });
+            });
+        });
+    });
+
+    describe("Delete user",function(){
+        it("delete nonexistent users",function(){
+            return new Promise((resolve,reject)=>{
+                userClient.del('/destroy/nonExistentUser',(err,req,res,obj)=>{
+                    if(err) 
+                        resolve();
+                    else  
+                        reject(new Error('should throw error'));
+                });
+            });
+        });
+    });
+
+
+
+
 });
