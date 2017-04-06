@@ -16,8 +16,8 @@
 <% if (notekey && user) { %>
     <div class="row">
     <div class="btn-group col-sm-12">
-        <a class="btn btn-default" href="/notes/destroy?key=<%= notekey %>" role="button">Delete</a>
-        <a class="btn btn-default" href="/notes/edit?key=<%= notekey %>" role="button">Edit</a>
+        <a class="btn btn-default" id="btndestroynote" href="/notes/destroy?key=<%= notekey %>" role="button">Delete</a>
+        <a class="btn btn-default" id="btneditnote" href="/notes/edit?key=<%= notekey %>" role="button">Edit</a>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target=".notes-comment-modal">Comment</button>
     </div>
     </div>
