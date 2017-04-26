@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<% include top %>
+    <p>Welcome to the Math calculator</p>
+
+    <ul>
+    <% for(var i=0;i<supplies.length;i++) { %>
+        <li>
+            <a href='supplies/<%= supplies[i] %>'>
+                <%= supplies[i] %>
+            </a>
+        </li>
+    <% } %>
+    <ul>    
+<% include bottom %>
