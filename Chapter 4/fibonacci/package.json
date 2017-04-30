@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "cross-env PORT=4242 DEBUG=fibonacci:* node ./bin/www",
-    
+    "server":"cross-env SERVERPORT=3002 node ./fiboserver",
     "test":"mocha"
   },
   "dependencies": {

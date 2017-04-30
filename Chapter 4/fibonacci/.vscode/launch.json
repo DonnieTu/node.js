@@ -17,11 +17,10 @@
         {
             "type":"node",
             "request": "launch",
-            "name":"debug",
-            "program": "node",
+            "name":"wget",
+            "program": "${workspaceRoot}\\wget.js",
             "args":[
-
-
+                "http://news.sina.com.cn"
             ]
         },
         {
