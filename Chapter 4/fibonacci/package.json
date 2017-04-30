@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "cross-env PORT=4242 DEBUG=fibonacci:* node ./bin/www",
-    "server":"cross-env SERVERPORT=3002 node ./fiboserver",
-    "test":"mocha"
+    "server": "cross-env SERVERPORT=3002 node ./fiboserver",
+    "test": "mocha"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -15,6 +15,7 @@
     "ejs": "~2.5.6",
     "express": "~4.15.2",
     "morgan": "~1.8.1",
+    "restify": "^4.3.0",
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {

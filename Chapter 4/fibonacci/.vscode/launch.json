@@ -11,7 +11,7 @@
             "name": "Launch Program",
             "program": "${workspaceRoot}\\bin\\www",
             "env":{
-                "PORT":"3000"
+                "PORT":"4242"
             }
         },
         {
