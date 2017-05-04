@@ -18,3 +18,26 @@ exports.read=function(key) {
         }
     });
 };
+
+exports.destory=function(key) {
+    return new Promise((resolve,reject)=>{
+        if(notes[key]) {
+            delete notes[key];
+            resolve();
+        } else {
+            reject(`Note ${key} does not exist`);
+        }
+    });
+}
+
+exports.keylist=function() {
+    return new Promise((resolve,reject)=>{
+        resolve(Object.keys(notes));
+    });
+};
+
+exports.count=function() {
+    return new Promise((resolve,reject)=>{
+        resolve(Object.keys(notes).length);
+    });
+};
