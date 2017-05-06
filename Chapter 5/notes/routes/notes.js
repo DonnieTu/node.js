@@ -56,4 +56,22 @@ router.get('/edit',function(req,res,next){
     .catch(err=>next(err));
 });
 
+router.get('/destroy',function(req,res,next){
+    notes.read(req.query.key)
+    .then(note=>{
+        res.render('notedestroy',{
+            title:note?"Edit "+note.title :"",
+            notekey:req.query.key,
+            note:note
+        });
+    })
+    .catch(err=>next(err));
+});
+
+router.post('/destroy/confirm',function(req,res,next){
+    notes.destory(req.body.notekey)
+    .then(()=>res.redirect('/'))
+    .catch(err=>next(err));
+});
+
 module.exports = router;
