@@ -43,4 +43,17 @@ router.get('/view',function(req,res,next){
     .catch(err=>next(err));
 });
 
+router.get('/edit',function(req,res,next){
+    notes.read(req.query.key)
+    .then(note=>{
+        res.render('noteedit',{
+            title:note?"Edit "+note.title :"Add a Note",
+            docreate:false,
+            notekey:req.query.key,
+            note:note
+        });
+    })
+    .catch(err=>next(err));
+});
+
 module.exports = router;

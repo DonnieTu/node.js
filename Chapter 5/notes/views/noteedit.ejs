@@ -11,6 +11,7 @@
 <% if(docreate) { %>
     <input type='text' name='notekey' value=''/>
 <% } else { %>
+    <%= note?notekey:""%>
     <input type='hidden' name='notekey' value='<%=note?notekey:""%>'/>
 <% } %>
 </p>
