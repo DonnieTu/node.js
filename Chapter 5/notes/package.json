@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "start": "cross-env DEBUG=notes:* node ./bin/www",
+    "server1": "cross-env  PORT=3001 DEBUG=notes:* node ./bin/www",
+    "server2": "cross-env PORT=3002 DEBUG=notes:* node ./bin/www",
     "test": "cross-env DEBUG=notes:* mocha"
   },
   "dependencies": {
